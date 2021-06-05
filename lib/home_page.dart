@@ -21,27 +21,60 @@ class _HomePageState extends State<HomePage> {
   initCamera() {
     cameraController = CameraController(cameras[0], ResolutionPreset.medium);
     cameraController.initialize().then((value) {
-      if(!mounted) {
+      if (!mounted) {
         return;
       }
       setState(() {
-              cameraController.startImageStream((imageFromStream) => 
-            {
-              if(!isWorking)
-              {
-                isWorking = true,
-                cameraImg = imageFromStream,
-              }
-            
+        cameraController.startImageStream((imageFromStream) => {
+              if (!isWorking)
+                {
+                  isWorking = true,
+                  cameraImg = imageFromStream,
+                }
             });
-      });  
+      });
     });
   }
 
   @override
+  void initState() {
+    super.initState();
+    initCamera();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    Size size = MediaQuery.of(context).size;
+    return MaterialApp(
+      home: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.black,
+            title: Padding(
+              padding: EdgeInsets.only(top: 40),
+              child: Center(
+                child: Text(''),
+              ),
+            ),
+          ),
+          body: Column(
+            children: [
+              Positioned(
+                top: 0,
+                bottom: 0,
+                width: size.width,
+                height: size.height - 100,
+                child: (!cameraController.value.isInitialized)
+                    ? Container()
+                    : AspectRatio(
+                        aspectRatio: cameraController.value.aspectRatio,
+                        child: CameraPreview(cameraController),
+                      ),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
