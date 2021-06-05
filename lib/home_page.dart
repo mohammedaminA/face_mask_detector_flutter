@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                     ? Container()
                     : AspectRatio(
                         aspectRatio: cameraController.value.aspectRatio,
-                        child: CameraPreview(cameraController.),
+                        child: CameraPreview(cameraController),
                       ),
               )
             ],
