@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart' as sp;
+import 'home_page.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -18,6 +19,12 @@ class _SplashScreenState extends State<SplashScreen> {
             fontWeight: FontWeight.bold,
             color: Colors.blueAccent),
       ),
+      image: Image.asset('assets/splash.png'),
+      photoSize: 130,
+      backgroundColor: Colors.white,
+      loaderColor: Colors.black,
+      loadingText: Text('By Mohammedamin Sultan Abdullah', style: TextStyle(color: Colors.white, fontSize: 16),),
+      navigateAfterSeconds: HomePage(),
     );
   }
 }
