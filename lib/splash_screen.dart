@@ -12,7 +12,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return sp.SplashScreen(
       seconds: 15,
-      title: Text(
+      title: Text(sasasa
         'Face Mask Detector',
         style: TextStyle(
             fontSize: 20,
