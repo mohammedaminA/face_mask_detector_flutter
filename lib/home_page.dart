@@ -60,17 +60,19 @@ class _HomePageState extends State<HomePage> {
           body: Column(
             children: [
               Positioned(
-                top: 0,
-                bottom: 0,
-                width: size.width,
-                height: size.height - 100,
-                child: (!cameraController.value.isInitialized)
-                    ? Container()
-                    : AspectRatio(
-                        aspectRatio: cameraController.value.aspectRatio,
-                        child: CameraPreview(cameraController),
-                      ),
-              )
+                  top: 0,
+                  bottom: 0,
+                  width: size.width,
+                  height: size.height - 100,
+                  child: Container(
+                    height: size.height - 100,
+                    child: (!cameraController.value.isInitialized)
+                        ? Container()
+                        : AspectRatio(
+                            aspectRatio: cameraController.value.aspectRatio,
+                            child: CameraPreview(cameraController),
+                          ),
+                  ))
             ],
           ),
         ),
