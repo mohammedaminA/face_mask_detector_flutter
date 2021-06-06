@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'main.dart';
+import 'package:tflite/tflite.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -34,6 +35,10 @@ class _HomePageState extends State<HomePage> {
             });
       });
     });
+
+    loadModel() async {
+      Tflite.loadModel(model: 'assets/model.tflite', labels: 'assets/labels.txt');
+    }
   }
 
   @override
