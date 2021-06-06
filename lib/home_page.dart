@@ -1,4 +1,3 @@
-import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
@@ -62,7 +61,7 @@ class _HomePageState extends State<HomePage> {
       result = '';
 
       recognitions.forEach((response) {
-        result += response['label'] + '/n';
+        result += response['label'] + '\n';
       });
 
       setState(() {
