@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'main.dart';
@@ -36,18 +38,17 @@ class _HomePageState extends State<HomePage> {
             });
       });
     });
-
-    
   }
+
   loadModel() async {
-      Tflite.loadModel(model: 'assets/model.tflite', labels: 'assets/labels.txt');
-    }
+    Tflite.loadModel(model: 'assets/model.tflite', labels: 'assets/labels.txt');
+  }
 
   runModelOnFrame() async {
     if (cameraImg != null) {
       var recognitions = await Tflite.runModelOnFrame(
         bytesList: cameraImg.planes.map((plane) {
-        return plane.bytes;
+          return plane.bytes;
         }).toList(),
         imageHeight: cameraImg.height,
         imageWidth: cameraImg.width,
@@ -56,18 +57,18 @@ class _HomePageState extends State<HomePage> {
         rotation: 90,
         numResults: 1,
         threshold: 0.1,
-        asynch: true
+        asynch: true,
       );
       result = '';
 
       recognitions.forEach((response) {
         result += response['label'] + '/n';
-       });
+      });
 
-       setState(() {
-                result;
-                isWorking = false;
-              });
+      setState(() {
+        result;
+      });
+      isWorking = false;
     }
   }
 
@@ -89,7 +90,15 @@ class _HomePageState extends State<HomePage> {
             title: Padding(
               padding: EdgeInsets.only(top: 40),
               child: Center(
-                child: Text(''),
+                child: Text(
+                  result,
+                  style: TextStyle(
+                    backgroundColor: Colors.black54,
+                    fontSize: 30,
+                    color: Colors.white,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
           ),
@@ -104,7 +113,14 @@ class _HomePageState extends State<HomePage> {
                         aspectRatio: cameraController.value.aspectRatio,
                         child: CameraPreview(cameraController),
                       ),
-              )
+              ),
+              Text(result,
+                  style: TextStyle(
+                      backgroundColor: Colors.black54,
+                      fontSize: 30,
+                      color: Colors.white),
+                      textAlign: TextAlign.center,
+                      )
             ],
           ),
         ),
